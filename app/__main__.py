@@ -1,11 +1,11 @@
-from models.line import LineModel
+from app.models.line import LineModel
 
-from view.interface import ui_factory
-from view.product_form import build_form, options as form_options
-from view.button import build_button, buttons
-from view.table import build_table
+from app.view.interface import ui_factory
+from app.view.product_form import build_form, options as form_options
+from app.view.button import build_button, buttons
+from app.view.table import build_table
 
-from controllers.ctrl import (
+from app.controllers.ctrl import (
     ajouter_entree,
     delete_line,
     call_finish,
@@ -13,7 +13,7 @@ from controllers.ctrl import (
     buttons_controller,
 )
 
-from services.store import CsvStore
+from app.services.store import CsvStore
 
 model = LineModel()
 

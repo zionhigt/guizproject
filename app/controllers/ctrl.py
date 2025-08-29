@@ -1,12 +1,12 @@
 import os
 from datetime import datetime
 
-from models.line import LineModel
+from app.models.line import LineModel
 
-from services.xl import export_to_excel
-from services.pdf import export_to_pdf
+from app.services.xl import export_to_excel
+from app.services.pdf import export_to_pdf
 
-from logger import log
+from app.logger import log
 
 def ajouter_entree(model, form):
     def callback():
