@@ -1,0 +1,5 @@
+env/
+Exports/
+app/data/
+.vscode/
+Gestion2.py
