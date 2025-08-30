@@ -78,19 +78,28 @@ def export_to_pdf(file, context):
     # Titre centré
     story.append(Spacer(1, 12))
     story.append(Paragraph(f"<para align='center'><b><font size=18>{context.get("title")}</font></b></para>", styles["Normal"]))
-    story.append(Spacer(1, 20))
+    story.append(Spacer(1, 35))
 
     def format_address(name, address_1, address_2, zip, city):
         # Adresse alignée à droite
-        return f"""<para align='right'>
+        return f"""<para align='justify'>
             {name}<br/>
             {address_1}<br/>
             {address_2}<br/>
             {zip} {city}
         </para>
         """
-    story.append(Paragraph(format_address(**context.get("contact")), styles["Normal"]))
-    story.append(Spacer(1, 30))
+    # Mettre le paragraph dans une table à une seule cellule
+    address = Paragraph(format_address(**context.get("contact")), styles["Normal"])
+    table_address = Table([["", address]], colWidths=[A4[0] - 240, 200])  # largeur de la table / cellule
+    table_address.setStyle(TableStyle([
+        ('ALIGN', (0, 0), (-1, -1), 'RIGHT'),   # cellule alignée à droite
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),    # alignement vertical en haut
+        ('LEFTPADDING', (0, 0), (-1, -1), 0),   # ajuster padding si nécessaire
+        ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+    ]))
+    story.append(table_address)
+    story.append(Spacer(1, 35))
 
     # Table (headers + data)
     col_widths = [250, 250, 50]
