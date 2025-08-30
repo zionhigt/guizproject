@@ -60,8 +60,20 @@ def call_finish(model, table):
         xl_columns = model_columns + ["Traité par ATREL", "Commentaire"]
         export_to_excel(excel_file, xl_columns, model.xl_data)
 
-        pdf_headers = ["N° Palette", "Produit", "QTE"]
-        export_to_pdf(pdf_file, pdf_headers, model.pdf_data)
+        pdf_table_headers = ["N° Palette", "Produit", "QTE"]
+        pdf_context = {
+            "title": "BON DE LIVRAISON",
+            "table_data": [pdf_table_headers] + model.pdf_data,
+            "contact": {
+                "name": "STACI 7",
+                "address_1": "Zone PROLOGIS / Parc de Chanteloup",
+                "address_2": "Bâtiment 1 – 2000 RD n°57",
+                "zip": "77550",
+                "city": "MOISSY-CRAMAYEL"
+            },
+            "logo_path": "logo.png",
+        } 
+        export_to_pdf(pdf_file, pdf_context)
         
         model.on_exported()
 
